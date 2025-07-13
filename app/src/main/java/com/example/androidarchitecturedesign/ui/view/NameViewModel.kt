@@ -23,6 +23,11 @@ class NameViewModel @Inject constructor(private  val userRepo : UserRepository) 
     fun getFetchUsers4(){
 
     }
+
+    fun getFetchUsers8(){
+
+    }
+
     fun fetchUsers(){
         viewModelScope.launch {
             _state.value = UiState.Loading

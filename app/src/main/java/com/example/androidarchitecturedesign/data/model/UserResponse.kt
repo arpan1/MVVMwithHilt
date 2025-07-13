@@ -1,3 +1,3 @@
 package com.example.androidarchitecturedesign.data.model
 
-class UserRespponse2 : ArrayList<UserRespponse2Item>()
+class UserResponse : ArrayList<UserRespponse2Item>()

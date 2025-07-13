@@ -5,7 +5,7 @@ import com.example.androidarchitecturedesign.data.model.UserResponse
 
 interface UserRepository {
 
-    suspend  fun fetchUsers() : List<UserResponse>
+    suspend  fun fetchUsers() : UserResponse
  //fun fetchUsers() : String
 
 }

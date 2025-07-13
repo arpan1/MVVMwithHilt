@@ -17,8 +17,8 @@ import javax.inject.Inject
 class NameViewModel @Inject constructor(private  val userRepo : UserRepository) :  ViewModel(){
 
 
-    private val _state = MutableStateFlow<UiState<List<UserResponse>>>(UiState.Idle)
-    val state: StateFlow<UiState<List<UserResponse>>> = _state.asStateFlow()
+    private val _state = MutableStateFlow<UiState<UserResponse>>(UiState.Idle)
+    val state: StateFlow<UiState<UserResponse>> = _state.asStateFlow()
 
 
     fun fetchUsers(){

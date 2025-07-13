@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(private val apiService: ApiService) : UserRepository {
 
-    override suspend fun fetchUsers(): List<UserResponse>{
+    override suspend fun fetchUsers(): UserResponse{
 
      return apiService.getUsers()
 

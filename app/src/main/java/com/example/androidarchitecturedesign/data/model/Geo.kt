@@ -1,3 +1,6 @@
 package com.example.androidarchitecturedesign.data.model
 
-class UserRespponse2 : ArrayList<UserRespponse2Item>()
+data class Geo(
+    val lat: String,
+    val lng: String
+)

@@ -20,7 +20,9 @@ class NameViewModel @Inject constructor(private  val userRepo : UserRepository) 
     private val _state = MutableStateFlow<UiState<UserResponse>>(UiState.Idle)
     val state: StateFlow<UiState<UserResponse>> = _state.asStateFlow()
 
+    fun getFetchUsers4(){
 
+    }
     fun fetchUsers(){
         viewModelScope.launch {
             _state.value = UiState.Loading

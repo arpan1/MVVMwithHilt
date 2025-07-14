@@ -14,6 +14,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,12 +29,34 @@ class NameViewModel @Inject constructor(private  val userRepo : UserRepository) 
      var allUsers: UserResponse = UserResponse()
 
 
-    var searchQuery by mutableStateOf("")
+    //var searchQuery by mutableStateOf("")
 
-    fun searchQueryChanged()
+    private val _searchQuery = MutableStateFlow<String>(" ")
+    val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
+
+    init {
+    observeSearch()
+
+
+    }
+
+    fun observeSearch()
     {
-        Log.e("Changed query--->>>",searchQuery)
-        filterUser(searchQuery)
+     viewModelScope.launch {
+       _searchQuery.debounce(1000L).collect {query ->
+           filterUser(query)}
+
+   }
+
+    }
+
+
+
+    fun searchQueryChanged(query:String)
+    {
+        _searchQuery.value = query
+        //Log.e("Changed query--->>>",_searchQuery.value)
+        //filterUser(_searchQuery.value)
 
     }
 

@@ -62,7 +62,7 @@ class MainActivity() : ComponentActivity() {
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier, viewModel: NameViewModel) {
 
-
+    val query by viewModel.searchQuery.collectAsState()
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -72,13 +72,13 @@ fun Greeting(name: String, modifier: Modifier = Modifier, viewModel: NameViewMod
             val uiState by viewModel.state.collectAsState()
             var searchQuery by remember { mutableStateOf(" ") }
 
-            TextField(value = viewModel.searchQuery, onValueChange = { viewModel.searchQuery = it
+            TextField(value = query, onValueChange = {  viewModel.searchQueryChanged(it)
 
-            viewModel.searchQueryChanged()})
+        })
 
             Spacer(modifier= Modifier.padding(16.dp))
 
-            Text("Edit test textfied is ${viewModel.searchQuery}")
+            Text("Edit test textfied is ${query}")
 
             Spacer(modifier= Modifier.padding(16.dp))
             Button(

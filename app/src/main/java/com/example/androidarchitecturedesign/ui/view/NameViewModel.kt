@@ -5,6 +5,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.androidarchitecturedesign.data.model.UserResponse
@@ -24,6 +25,33 @@ class NameViewModel @Inject constructor(private  val userRepo : UserRepository) 
     val state: StateFlow<UiState<UserResponse>> = _state.asStateFlow()
 
 
+     var allUsers: UserResponse = UserResponse()
+
+
+    var searchQuery by mutableStateOf("")
+
+    fun searchQueryChanged()
+    {
+        Log.e("Changed query--->>>",searchQuery)
+        filterUser(searchQuery)
+
+    }
+
+    fun filterUser(searchQuery:String)
+    {
+        val filteredList =  allUsers.filter { it.name.contains(searchQuery, ignoreCase = true) }
+        for(i in filteredList){
+
+            Log.e("user are-->>",i.name)
+        }
+
+        val filteredUserResponse = UserResponse()
+        filteredUserResponse.addAll(filteredList)
+
+        _state.value = UiState.Success(filteredUserResponse)
+
+    }
+
 
 
 
@@ -33,9 +61,10 @@ class NameViewModel @Inject constructor(private  val userRepo : UserRepository) 
 
             try{
                 val users = userRepo.fetchUsers()
+
+                allUsers  = users
+
                 _state.value = UiState.Success(users)
-
-
 
             }
 

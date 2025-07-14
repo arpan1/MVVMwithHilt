@@ -72,11 +72,15 @@ fun Greeting(name: String, modifier: Modifier = Modifier, viewModel: NameViewMod
             val uiState by viewModel.state.collectAsState()
             var searchQuery by remember { mutableStateOf(" ") }
 
-            TextField(value = searchQuery, onValueChange = { searchQuery = it })
+            TextField(value = viewModel.searchQuery, onValueChange = { viewModel.searchQuery = it
+
+            viewModel.searchQueryChanged()})
 
             Spacer(modifier= Modifier.padding(16.dp))
 
+            Text("Edit test textfied is ${viewModel.searchQuery}")
 
+            Spacer(modifier= Modifier.padding(16.dp))
             Button(
                 onClick = {
 

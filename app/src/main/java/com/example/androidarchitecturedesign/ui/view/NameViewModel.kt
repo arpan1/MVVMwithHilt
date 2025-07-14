@@ -39,13 +39,20 @@ class NameViewModel @Inject constructor(private  val userRepo : UserRepository) 
 
     fun filterUser(searchQuery:String)
     {
-        val filteredList =  allUsers.filter { it.name.contains(searchQuery, ignoreCase = true) }
+
+        val filteredList = if (searchQuery.isBlank()) {
+            allUsers
+        } else {
+            allUsers.filter { it.name.contains(searchQuery, ignoreCase = true) }
+        }
+
         for(i in filteredList){
 
             Log.e("user are-->>",i.name)
         }
 
         val filteredUserResponse = UserResponse()
+
         filteredUserResponse.addAll(filteredList)
 
         _state.value = UiState.Success(filteredUserResponse)

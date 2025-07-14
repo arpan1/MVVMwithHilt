@@ -2,6 +2,9 @@ package com.example.androidarchitecturedesign.ui.view
 
 import android.util.Log
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.androidarchitecturedesign.data.model.UserResponse
@@ -20,7 +23,9 @@ class NameViewModel @Inject constructor(private  val userRepo : UserRepository) 
     private val _state = MutableStateFlow<UiState<UserResponse>>(UiState.Idle)
     val state: StateFlow<UiState<UserResponse>> = _state.asStateFlow()
 
-    fun getFetchUsers4(){
+
+
+
 
     fun fetchUsers(){
         viewModelScope.launch {
